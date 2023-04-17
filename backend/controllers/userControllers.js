@@ -76,13 +76,15 @@ const loginUser = asyncHandler(async (req, res) => {
 const getUser = asyncHandler(async (req, res) => {
   //After going through 'protect' middleware, we have 'req.user' which contains a user document
   //So we can destructure it to get the logged-in user's information
-  const { _id, name, email } = req.user;
+  // const { _id, name, email } = req.user;
 
-  res.status(200).json({
-    _id: _id,
-    name: name,
-    email: email,
-  });
+  // res.status(200).json({
+  //   _id: _id,
+  //   name: name,
+  //   email: email,
+  // });
+
+  res.status(200).json(req.user);
 });
 
 // Generate JWT

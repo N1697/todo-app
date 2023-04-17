@@ -46,16 +46,14 @@ const updateTodo = asyncHandler(async (req, res) => {
   }
 
   //Check if the logged-in user exists
-  const user = await User.findById({ _id: req.user._id });
-
-  if (!user) {
+  if (!req.user) {
     res.status(401);
     throw new Error("User does not exist");
   }
 
   //Check if the user of todo matches the logged-in user
   //We cannot compare 2 objects so we need to convert them to string
-  if (todo.user.toString() !== user._id.toString()) {
+  if (todo.user.toString() !== req.user._id.toString()) {
     res.status(401);
     throw new Error("User not authorized");
   }
@@ -86,16 +84,14 @@ const deleteTodo = asyncHandler(async (req, res) => {
   }
 
   //Check if the logged-in user exists
-  const user = await User.findById({ _id: req.user._id });
-
-  if (!user) {
+  if (!req.user) {
     res.status(401);
     throw new Error("User does not exist");
   }
 
   //Check if the user of todo matches the logged-in user
   //We cannot compare 2 objects so we need to convert them to string
-  if (todo.user.toString() !== user._id.toString()) {
+  if (todo.user.toString() !== req.user._id.toString()) {
     res.status(401);
     throw new Error("User not authorized");
   }

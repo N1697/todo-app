@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "/api/todos/";
+const API_URL = "https://todo-app-r5i6.onrender.com/api/todos/";
 
 //Get todos
 const getTodos = async (token) => {

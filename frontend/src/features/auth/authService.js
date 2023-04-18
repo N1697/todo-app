@@ -2,7 +2,7 @@
 //and setting any data in local storage
 import axios from "axios";
 
-const API_URL = "/api/users/";
+const API_URL = "https://todo-app-r5i6.onrender.com/api/users/";
 
 //Register
 const register = async (userData) => {

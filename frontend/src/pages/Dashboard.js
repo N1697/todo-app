@@ -1,9 +1,8 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import TodoForm from "../components/TodoForm";
-import { reset, getTodos } from "../features/todos/todoSlice";
+import TodoForm from "../components/TodoForm.js";
+import { reset, getTodos } from "../features/todos/todoSlice.js";
 import Spinner from "../components/Spinner.js";
 import TodoItem from "../components/TodoItem.js";
 
@@ -18,7 +17,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (isError) {
-      console.log();
+      console.log(message);
     }
 
     if (!user) {
@@ -26,11 +25,13 @@ const Dashboard = () => {
     }
 
     dispatch(getTodos());
+  }, [user, navigate, isError, dispatch]);
 
+  useEffect(() => {
     return () => {
       dispatch(reset());
     };
-  }, [user, navigate, isError, message, dispatch]);
+  }, [dispatch]);
 
   if (isLoading) {
     return <Spinner />;
@@ -48,9 +49,9 @@ const Dashboard = () => {
       <section className="content">
         {todos.length > 0 ? (
           <div className="todos">
-            {todos.map((todo) => (
-              <TodoItem key={todo._id} todo={todo} />
-            ))}
+            {todos.map((todo) => {
+              return <TodoItem key={todo._id} todo={todo} />;
+            })}
           </div>
         ) : (
           <h3>What would you like to do?</h3>

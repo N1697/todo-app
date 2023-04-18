@@ -8,16 +8,13 @@ import connectDB from "./config/db.js";
 import cors from "cors";
 import path from "path";
 
-dotenv.config();
-
-connectDB();
-
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-const PORT = process.env.PORT || 5000;
+dotenv.config();
+connectDB();
 
 app.use("/api/todos", todosRoutes);
 app.use("/api/users", userRoutes);
@@ -37,6 +34,8 @@ if (process.env.NODE_ENV === "production") {
 //========== DEPLOYMENT ==========
 
 app.use(errorHandler);
+
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, (req, res) => {
   console.log(`Server is running on port: ${PORT}`);
